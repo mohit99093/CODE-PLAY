@@ -1,0 +1,166 @@
+<html>
+    <head>
+        <title>CODE-PLAYER</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+        body{
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #header{
+            height: 30px;
+            background-color: #EDEDED;
+            padding: 10px;
+            
+        }
+        #bcontainer{
+            width: 500px;
+            margin: 0 auto;
+        }
+        #logo{
+            float: left;
+            font-weight: 700;
+            padding: 0px 5px 5px 5px;
+            font-size: 30px;
+        }
+        .bb{
+            float: left;
+            border: 1px solid gray;
+            padding: 5px 25px;
+            border-radius: 2px;
+            font: bold;
+            cursor: pointer;
+            border-right: none;
+        }
+        #html{
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        #out{
+            border-right: 1px solid gray;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .hovercolor{
+            background-color: blue;
+        }
+        
+        .aa{
+            background-color: red;
+        }
+        textarea{
+            width: 50%;
+                float: left;
+            resize: none;
+            border: 1px solid black;
+            border-top: none;
+            background-color: #F7F7F7;
+            outline: none;
+        }
+        
+        .hidden{
+            display: none;
+        }
+        .hide{
+            display: none;
+        }
+        .panel{
+            background-color: #f7f7f7;
+        }
+        .lal{
+            background-color: #ffffff;
+        }
+
+    </style>
+    <body>
+        <div id="header">
+                <div id="logo">codePlayer</div>
+                <div id="bcontainer">
+                    
+                        <div id="html" class="bb aa">HTML</div>
+                    
+                        <div id="js" class="bb ">JavaScript</div>
+                    
+                        <div id="css" class="bb ">Css</div>
+                    
+                        <div id="out" class="bb aa">OutPut</div>
+            
+                        
+                </div>
+        </div>
+        
+        <div id="bdcontainer">
+            
+                <textarea id="htmlp"; class="panel"><p id="po">mohit</p></textarea>
+            
+                <textarea id="cssp"; class="panel hidden">p{font-size: 100px; }</textarea>
+            
+                <textarea id="jsp"; class="panel hidden">  </textarea>
+            
+                <iframe id="outp"; class="panel"></iframe>
+            
+                <textarea id="note" class="panel hide"></textarea>
+        </div>
+    
+    <script type="text/javascript">
+     
+            function update()
+        {
+            $("#outp").contents().find("html").html("<html><head><style type='text/css'>" + $("#cssp").val() + "</style></head><body>" + $("#htmlp").val() + "</body></html>");
+            document.getElementById("outp").contentWindow.eval($("#jsp").val());
+            
+            
+        }
+        
+            var sel=2;
+            $(".bb ").hover(function()
+                          {
+                    $(this).addClass("hovercolor");
+            },function()
+                          {
+                $(this).removeClass("hovercolor");
+           });
+           
+            $(".bb").click(function()
+                          {
+                $(this).toggleClass("aa");
+                
+                var pid = $(this).attr("id") + "p"
+                $("#"+pid).toggleClass("hidden");
+              
+                    var a = 4 - $(".hidden").length;
+                    $(".panel").width(($(window).width() / a)  - 10);
+                if($(".hidden").length == 4)
+                    {
+                        $("#note").removeClass("hide");
+                    }
+                else{
+                    $("#note").addClass("hide");
+                }
+            })
+        
+            $("textarea").height($(window).height());
+            $(".panel").height($("textarea").height());
+            $(".panel").width(($(window).width() /2 ) - 10);
+        
+           
+        update();
+            $("textarea").on('change keyup paste', function() {
+                
+                update();
+            });
+        
+            $(".panel").click(function()
+                             {
+                 
+                $(".panel").filter( ".lal" ).removeClass("lal");
+                $(this).addClass("lal");
+               
+            })
+    </script>
+    </body>
+    
+</html>
